@@ -16,7 +16,33 @@ function rand(seed: number) {
   return x - Math.floor(x);
 }
 
-const goldMetal = <meshStandardMaterial color={GOLD} metalness={1} roughness={0.22} envMapIntensity={1.6} />;
+const goldMetal = <meshStandardMaterial color="#F0CB84" metalness={1} roughness={0.14} envMapIntensity={2.6} emissive={GOLD} emissiveIntensity={0.18} />;
+
+// Soft radial halo drawn once on a canvas; rendered additively so it reads as light, not a disc.
+function useGlowTexture() {
+  return useMemo(() => {
+    const c = document.createElement("canvas");
+    c.width = c.height = 256;
+    const g = c.getContext("2d")!;
+    const grad = g.createRadialGradient(128, 128, 0, 128, 128, 128);
+    grad.addColorStop(0, "rgba(255,236,190,0.95)");
+    grad.addColorStop(0.25, "rgba(217,181,107,0.45)");
+    grad.addColorStop(0.55, "rgba(20,165,131,0.18)");
+    grad.addColorStop(1, "rgba(20,165,131,0)");
+    g.fillStyle = grad;
+    g.fillRect(0, 0, 256, 256);
+    return new THREE.CanvasTexture(c);
+  }, []);
+}
+
+function Halo() {
+  const map = useGlowTexture();
+  return (
+    <sprite scale={[8.5, 8.5, 1]} position={[0, 0, -1.2]}>
+      <spriteMaterial map={map} blending={THREE.AdditiveBlending} transparent opacity={0.6} depthWrite={false} />
+    </sprite>
+  );
+}
 
 // A faceted emerald held inside three counter-rotating gold gimbal rings:
 // protection and reliability around the one person you trust.
@@ -45,7 +71,17 @@ function Sculpture({ still }: { still: React.MutableRefObject<boolean> }) {
     <>
       <mesh ref={core}>
         <icosahedronGeometry args={[0.95, 1]} />
-        <meshPhysicalMaterial color={EMERALD} metalness={0.25} roughness={0.12} clearcoat={1} clearcoatRoughness={0.05} flatShading envMapIntensity={1.8} />
+        <meshPhysicalMaterial
+          color="#10A37F"
+          emissive="#0A7A60"
+          emissiveIntensity={0.35}
+          metalness={0.2}
+          roughness={0.1}
+          clearcoat={1}
+          clearcoatRoughness={0.04}
+          flatShading
+          envMapIntensity={1.6}
+        />
       </mesh>
       <group ref={g1} rotation={[0, 0, 0.5]}>
         <mesh>
@@ -69,7 +105,7 @@ function Sculpture({ still }: { still: React.MutableRefObject<boolean> }) {
         {beadPositions.map((p, i) => (
           <mesh key={i} position={[p[0], p[1], p[2]]}>
             <sphereGeometry args={[0.03, 10, 10]} />
-            <meshBasicMaterial color="#F3DDA6" />
+            <meshBasicMaterial color="#FFF1C9" />
           </mesh>
         ))}
       </group>
@@ -142,13 +178,20 @@ function Rig({ rtl }: { rtl: boolean }) {
   return (
     <>
       <Environment frames={1} resolution={256}>
-        <Lightformer form="rect" intensity={4} position={[0, 5, 3]} scale={[12, 3, 1]} />
-        <Lightformer form="rect" intensity={2.5} color="#F3DDA6" position={[-6, 1, 2]} scale={[3, 7, 1]} />
-        <Lightformer form="rect" intensity={2} color="#6FE3C4" position={[6, -1, 2]} scale={[3, 6, 1]} />
-        <Lightformer form="ring" intensity={3} position={[0, -3, -4]} scale={6} />
+        <Lightformer form="rect" intensity={8} position={[0, 5, 3]} scale={[14, 4, 1]} />
+        <Lightformer form="rect" intensity={5} color="#FFE7B0" position={[-6, 1, 2]} scale={[3, 8, 1]} />
+        <Lightformer form="rect" intensity={4} color="#6FE3C4" position={[6, -1, 2]} scale={[3, 7, 1]} />
+        <Lightformer form="ring" intensity={6} position={[0, -3, -4]} scale={7} />
+        <Lightformer form="rect" intensity={3} position={[0, 0, 8]} scale={[10, 6, 1]} />
       </Environment>
 
+      <ambientLight intensity={0.7} />
+      <directionalLight position={[4, 5, 6]} intensity={2.2} color="#FFF3D6" />
+      <pointLight position={[-4, -2, 4]} intensity={30} color="#6FE3C4" distance={14} />
+
       <group ref={hero}>
+        <Halo />
+        <pointLight intensity={14} color="#FFD98A" distance={9} />
         <Sculpture still={still} />
       </group>
 
@@ -156,7 +199,7 @@ function Rig({ rtl }: { rtl: boolean }) {
         <bufferGeometry>
           <bufferAttribute attach="attributes-position" array={dustPositions} count={DUST} itemSize={3} />
         </bufferGeometry>
-        <pointsMaterial color="#F3DDA6" size={0.028} transparent opacity={0.45} sizeAttenuation />
+        <pointsMaterial color="#FFE9B8" size={0.034} transparent opacity={0.7} sizeAttenuation />
       </points>
     </>
   );
@@ -166,7 +209,11 @@ export default function Scene() {
   const { rtl } = useLang();
   return (
     <div className="pointer-events-none fixed inset-0" aria-hidden>
-      <Canvas camera={{ position: [0, 0, 7], fov: 45 }} dpr={[1, 1.5]} gl={{ antialias: true, powerPreference: "low-power" }}>
+      <Canvas camera={{ position: [0, 0, 7], fov: 45 }} dpr={[1, 1.5]} gl={{ antialias: true, powerPreference: "low-power" }}
+        onCreated={({ gl }) => {
+          gl.toneMappingExposure = 1.05;
+        }}
+      >
         <Rig rtl={rtl} />
       </Canvas>
     </div>
