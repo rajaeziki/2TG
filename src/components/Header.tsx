@@ -4,8 +4,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LANGS } from "@/i18n/dictionary";
 import { useLang } from "@/i18n/LangProvider";
-import { TEL } from "@/data/site";
-import { track } from "@/lib/analytics";
 
 export default function Header() {
   const { t, lang } = useLang();
@@ -32,13 +30,6 @@ export default function Header() {
           <Link href={`${home}#faq`} className="transition hover:text-gold">{t.nav.faq}</Link>
         </div>
         <div className="flex items-center gap-2">
-          <a
-            href={`tel:${TEL[0]}`}
-            onClick={() => track("call_click", { place: "header" })}
-            className="rounded-full border border-gold/60 px-3 py-1.5 text-xs font-semibold text-gold transition hover:bg-gold hover:text-ink-950 sm:px-4 sm:text-sm"
-          >
-            {t.call}
-          </a>
           <div className="flex gap-0.5 rounded-full border border-white/15 p-0.5 sm:gap-1 sm:p-1" role="group" aria-label="Language">
             {LANGS.map((l) => (
               <Link
