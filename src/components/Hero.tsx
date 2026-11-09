@@ -30,7 +30,7 @@ export default function Hero() {
           <h1 data-hero className="font-display text-4xl font-semibold leading-[1.1] sm:text-6xl">
             {t.hero.title} <span className="text-shine">{t.hero.accent}</span>
           </h1>
-          <p data-hero className="mt-6 max-w-xl text-lg leading-relaxed text-white/70">
+          <p data-hero className="mt-6 max-w-xl text-lg leading-relaxed text-ink-950/70">
             {t.hero.sub}
           </p>
           <div data-hero className="mt-9 flex flex-wrap gap-3">
@@ -45,7 +45,7 @@ export default function Hero() {
               {t.hero.wa}
             </a>
           </div>
-          <ul data-hero className="mt-10 flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/60">
+          <ul data-hero className="mt-10 flex flex-wrap gap-x-6 gap-y-2 text-sm text-ink-950/60">
             {t.hero.chips.map((c) => (
               <li key={c} className="flex items-center gap-2">
                 <span className="h-1.5 w-1.5 rotate-45 bg-gold" />

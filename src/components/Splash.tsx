@@ -27,9 +27,9 @@ export default function Splash() {
       {visible && (
         <motion.div
           key="splash"
-          className="fixed inset-0 z-[100] flex cursor-pointer flex-col items-center justify-center bg-ink-950"
+          className="fixed inset-0 z-[100] flex cursor-pointer flex-col items-center justify-center bg-cream"
           style={{
-            backgroundImage: "radial-gradient(50% 40% at 50% 50%, rgba(20,165,131,0.18), transparent 70%)",
+            backgroundImage: "radial-gradient(50% 40% at 50% 50%, rgba(15,90,72,0.10), transparent 70%)",
           }}
           exit={{ opacity: 0, scale: 1.06, filter: "blur(6px)" }}
           transition={{ duration: 0.5, ease: "easeInOut" }}
@@ -45,7 +45,7 @@ export default function Splash() {
                 height="72"
                 rx="10"
                 transform="rotate(45 60 60)"
-                stroke="#D9B56B"
+                stroke="#A67C2E"
                 strokeWidth="2"
                 initial={{ pathLength: 0 }}
                 animate={{ pathLength: 1 }}
@@ -55,7 +55,7 @@ export default function Splash() {
                 x="60"
                 y="70"
                 textAnchor="middle"
-                fill="#D9B56B"
+                fill="#A67C2E"
                 fontSize="30"
                 fontFamily="var(--font-playfair), serif"
                 fontWeight="600"
@@ -67,7 +67,7 @@ export default function Splash() {
               </motion.text>
             </svg>
             <motion.p
-              className="mt-5 font-display text-4xl font-semibold text-white"
+              className="mt-5 font-display text-4xl font-semibold text-ink-950"
               initial={{ opacity: 0, letterSpacing: "0.05em" }}
               animate={{ opacity: 1, letterSpacing: "0.3em" }}
               transition={{ delay: 0.5, duration: 0.8, ease: "easeOut" }}

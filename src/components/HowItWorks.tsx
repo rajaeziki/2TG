@@ -22,7 +22,7 @@ export default function HowItWorks() {
             >
               <span className="font-display text-4xl text-gold">0{i + 1}</span>
               <h3 className="mt-4 font-display text-xl font-semibold">{s.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-white/65">{s.text}</p>
+              <p className="mt-2 text-sm leading-relaxed text-ink-950/65">{s.text}</p>
             </motion.div>
           ))}
         </div>

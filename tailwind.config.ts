@@ -5,9 +5,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        // Midnight emerald (trust, calm) + champagne gold (premium, warmth).
-        ink: { 950: "#050D0C", 900: "#0A1917", 800: "#10241F", 700: "#17352E" },
-        gold: { DEFAULT: "#D9B56B", light: "#F3DDA6" },
+        // Warm light palette: cream surfaces, deep forest-green text, antique gold accents.
+        cream: { DEFAULT: "#FAF6EE", 100: "#F3ECDD", 200: "#E9DFC8" },
+        ink: { 950: "#0D2B24", 900: "#133A31", 800: "#1B4A3F", 700: "#2A6355" },
+        forest: "#0F5A48",
+        gold: { DEFAULT: "#A67C2E", light: "#E2C27A" },
       },
       fontFamily: {
         sans: ["var(--font-cairo)", "system-ui", "sans-serif"],

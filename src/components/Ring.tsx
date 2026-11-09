@@ -63,7 +63,7 @@ export default function Ring({ images }: { images: RingImage[] }) {
           {items.map((img, i) => (
             <div
               key={img.id}
-              className="absolute -left-[110px] -top-[110px] h-[220px] w-[220px] overflow-hidden rounded-xl border border-gold/30 bg-ink-800 shadow-[0_14px_40px_rgba(0,0,0,0.55)] [backface-visibility:hidden]"
+              className="absolute -left-[110px] -top-[110px] h-[220px] w-[220px] overflow-hidden rounded-xl border border-gold/30 bg-cream-200 shadow-[0_14px_40px_rgba(15,58,48,0.28)] [backface-visibility:hidden]"
               style={{ transform: `rotateY(${(i * 360) / n}deg) translateZ(${RADIUS}px)` }}
             >
               {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -80,7 +80,7 @@ export default function Ring({ images }: { images: RingImage[] }) {
           ))}
         </div>
       </div>
-      <p className="absolute bottom-2 w-full text-center text-xs text-white/40">{t.gallery.drag}</p>
+      <p className="absolute bottom-2 w-full text-center text-xs text-ink-950/40">{t.gallery.drag}</p>
     </div>
   );
 }

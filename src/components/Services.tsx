@@ -12,7 +12,7 @@ export default function Services() {
       <div className="mx-auto max-w-6xl">
         <div className="mb-4 h-px w-12 bg-gold" />
         <h2 className="font-display text-3xl font-semibold sm:text-5xl">{t.services.title}</h2>
-        <p className="mt-3 text-white/60">{t.services.sub}</p>
+        <p className="mt-3 text-ink-950/60">{t.services.sub}</p>
         <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
           {SERVICE_IDS.map((s, i) => {
             const item = t.services.items[s.id];
@@ -29,7 +29,7 @@ export default function Services() {
                   <span className="font-display text-5xl text-gold/35 [transform:translateZ(40px)]">0{i + 1}</span>
                   <h3 className="mt-6 font-display text-2xl font-semibold [transform:translateZ(28px)]">{item.label}</h3>
                   <div className="my-4 h-px w-10 bg-gold/60" />
-                  <p className="text-sm leading-relaxed text-white/65 [transform:translateZ(14px)]">{item.blurb}</p>
+                  <p className="text-sm leading-relaxed text-ink-950/65 [transform:translateZ(14px)]">{item.blurb}</p>
                 </Tilt>
               </motion.div>
             );
@@ -39,7 +39,7 @@ export default function Services() {
           {(["full", "part"] as const).map((id) => (
             <Tilt key={id} max={3} className="glass p-6">
               <h3 className="font-display text-xl font-semibold text-gold">{t.services.plans[id].label}</h3>
-              <p className="mt-1 text-sm text-white/65">{t.services.plans[id].detail}</p>
+              <p className="mt-1 text-sm text-ink-950/65">{t.services.plans[id].detail}</p>
             </Tilt>
           ))}
         </div>

@@ -18,7 +18,7 @@ export default function Gallery() {
       <div className="mx-auto max-w-6xl">
         <div className="mb-4 h-px w-12 bg-gold" />
         <h2 className="font-display text-3xl font-semibold sm:text-5xl">{t.gallery.title}</h2>
-        {!hasTeam && <p className="mt-2 text-white/60">{t.gallery.note}</p>}
+        {!hasTeam && <p className="mt-2 text-ink-950/60">{t.gallery.note}</p>}
         <div className="mt-6">
           <Ring images={images} />
         </div>

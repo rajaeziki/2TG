@@ -24,9 +24,9 @@ export default function Testimonials() {
         <div className="mt-10 grid gap-5 md:grid-cols-2">
           {TESTIMONIALS.map((q) => (
             <figure key={q.name + q.text} className="glass p-7">
-              <blockquote className="leading-relaxed text-white/80">“{q.text}”</blockquote>
+              <blockquote className="leading-relaxed text-ink-950/80">“{q.text}”</blockquote>
               <figcaption className="mt-4 text-sm text-gold">
-                {q.name} <span className="text-white/50">· {q.role}</span>
+                {q.name} <span className="text-ink-950/50">· {q.role}</span>
               </figcaption>
             </figure>
           ))}
